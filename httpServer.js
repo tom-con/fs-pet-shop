@@ -3,18 +3,14 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-
 const port = 8000;
 
 const server = http.createServer((req, res) => {
   fs.readFile('./pets.json', 'utf8', (err, data) => {
-    // console.log(req.url);
     if (err) throw err;
     let pathName = url.parse(req.url).pathname; // "/pets/1"
     let method = req.method;
     let body = req.body;
-    // console.log(req);
-    // console.log(body);
     let pathArr = pathName.match(/[^/]+/g); // ["pets", "1"]
     if (method === "GET") {
       if (!pathArr) {
